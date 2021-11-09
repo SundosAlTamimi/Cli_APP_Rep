@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">valetAppSec</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">Save</string>
+    <string name="signup">Sign Up</string>
+</resources>

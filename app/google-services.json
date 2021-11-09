@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "849312301009",
+    "project_id": "valetapprealtime",
+    "storage_bucket": "valetapprealtime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849312301009:android:416a345026acc4d6be6af0",
+        "android_client_info": {
+          "package_name": "com.example.valetappsec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849312301009-8rgiotatkm4mdp6c75rjjhiqsdo0q9ji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHUxOR3tjhaUn3GXf5w4Cq5_U4LUEsJt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849312301009-8rgiotatkm4mdp6c75rjjhiqsdo0q9ji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
