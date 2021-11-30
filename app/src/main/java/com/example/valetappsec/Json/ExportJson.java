@@ -15,12 +15,16 @@ import com.example.valetappsec.Model.SingUpClientModel;
 import com.example.valetappsec.Model.ValetFireBaseItem;
 import com.example.valetappsec.SingUpValetActivityApp;
 import com.example.valetappsec.ValetDatabase;
+import com.google.gson.JsonObject;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -30,6 +34,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -51,13 +57,17 @@ public class ExportJson {
         valetDatabase = new ValetDatabase(context);
     }
 
-    public void SingUpCaptain(Context context, SingUpClientModel singUpClientModel) {
+    public void SingUpCaptain(Context context, JSONObject jsonObject,SingUpClientModel singUpClientModel) {
 
-        new SingUpClientAsync(context, singUpClientModel).execute();
+        new SingUpClientAsync(context, jsonObject,singUpClientModel).execute();
 
     }
 
+    public void SingUpCaptain_2(Context context,SingUpClientModel singUpClientModel) {
 
+        new SingUpClientAsync_2(context,singUpClientModel).execute();
+
+    }
     public void updateStatus(Context context, String CPS, String CT) {
         new updateStatus(context, CPS, CT).execute();
     }
@@ -78,7 +88,9 @@ public class ExportJson {
     public void updateStatusRate(Context context, String CPS, String CT, String rate, String note) {
         new updateRateStatus(context, CPS, CT, rate, note).execute();
     }
-
+    public void SendImage (Context context,String image){
+        new SendImage(context,image).execute();
+    }
 
     public void CaptainTransfer(Context context, CaptainClientTransfer captainClientTransfer) {
 
@@ -91,7 +103,7 @@ public class ExportJson {
 
     }
 
-    private class SingUpClientAsync extends AsyncTask<String, String, String> {
+    private class SingUpClientAsync_2 extends AsyncTask<String, String, String> {
         private String JsonResponse = null;
         private HttpURLConnection urlConnection = null;
         private BufferedReader reader = null;
@@ -100,7 +112,7 @@ public class ExportJson {
         JSONObject jsonObject;
         SingUpClientModel singUpClientModel;
 
-        public SingUpClientAsync(Context context, SingUpClientModel singUpClientModel) {
+        public SingUpClientAsync_2(Context context, SingUpClientModel singUpClientModel) {
 
             this.singUpClientModel = singUpClientModel;
             this.jsonObject = jsonObject;
@@ -137,7 +149,7 @@ public class ExportJson {
                         + "&carModel=" + singUpClientModel.getCarModel()
                         + "&carColor=" + singUpClientModel.getCarColor()
                         + "&carLot=" + singUpClientModel.getCarLot()
-                        + "&carPic=" + singUpClientModel.getCarPic();
+                        + "&carPic=" + "null";
 
                 URL url = new URL(link + data);
 
@@ -185,6 +197,151 @@ public class ExportJson {
                 }
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            swASingUp.dismissWithAnimation();
+
+            if (s != null) {
+                if (s.contains("Success_Add_Client")) {
+                    Log.e("salesManInfo", "NEW_CAPTAINS SUCCESS\t" + s.toString());
+                    Toast.makeText(context, "NEW CAPTAINS SUCCESS", Toast.LENGTH_SHORT).show();
+                    SingUpValetActivityApp singUpValet = (SingUpValetActivityApp) context;
+                    singUpValet.finish();
+                    isOk = true;
+
+                } else {
+
+//                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+//                            .setTitleText("Sing Up Fail Please Try Again !!!")
+//                            .setContentText("")
+////                            .setCancelButton("cancel", new SweetAlertDialog.OnSweetClickListener() {
+////                                @Override
+////                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+////                                    sweetAlertDialog.dismissWithAnimation();
+////                                }
+////                            })
+//                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                @Override
+//                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+//
+//                                    sweetAlertDialog.dismissWithAnimation();
+//
+//
+//                                }
+//                            })
+//                            .show();
+                    isOk = true;
+                }
+            } else {
+                isOk = true;
+            }
+        }
+    }
+
+    private class SingUpClientAsync extends AsyncTask<String, String, String> {
+        private String JsonResponse = null;
+        private HttpURLConnection urlConnection = null;
+        private BufferedReader reader = null;
+
+
+        JSONObject jsonObject;
+        SingUpClientModel singUpClientModel;
+
+        public SingUpClientAsync(Context context, JSONObject jsonObject, SingUpClientModel singUpClientModel) {
+
+            this.singUpClientModel = singUpClientModel;
+            this.jsonObject = jsonObject;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            swASingUp = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+            swASingUp.getProgressHelper().setBarColor(Color.parseColor("#FDD835"));
+            swASingUp.setTitleText("PleaseWait");
+            swASingUp.setCancelable(false);
+            swASingUp.show();
+
+            isOk = false;
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String ip=valetDatabase.getAllIPSetting();//192.168.1.101:81
+                URL_TO_HIT = "http://"+ip.trim()+"/api/ValCaptain/saveUser?more=1";
+            } catch (Exception e) {
+
+            }
+
+
+            Log.e("URL_TO_HIT",""+URL_TO_HIT+"   "+jsonObject.toString());
+            try {
+
+
+                HttpClient client = new DefaultHttpClient();
+                HttpPost request = new HttpPost();
+                request.setURI(new URI(URL_TO_HIT));
+
+                List<BasicNameValuePair> nameValuePairs = new ArrayList<>(1);
+                // nameValuePairs.add(new BasicNameValuePair("_ID", "3"));
+
+                nameValuePairs.add(new BasicNameValuePair("",jsonObject.toString()));
+
+                // nameValuePairs.add(new BasicNameValuePair("SERIAL",convertToEnglish(jsonObject.getSERIAL())));
+
+                request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+
+                Log.e("URL_TO_HIT",""+URL_TO_HIT+"  "+jsonObject.toString());
+
+                HttpResponse response = client.execute(request);
+
+
+                BufferedReader in = new BufferedReader(new
+                        InputStreamReader(response.getEntity().getContent()));
+
+                StringBuffer sb = new StringBuffer("");
+                String line = "";
+
+                while ((line = in.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                in.close();
+
+
+                JsonResponse = sb.toString();
+                Log.e("exportCarPark", "JsonResponse\t" + JsonResponse);
+
+                return JsonResponse;
+
+
+            }//org.apache.http.conn.HttpHostConnectException: Connection to http://10.0.0.115 refused
+            catch (HttpHostConnectException ex) {
+                ex.printStackTrace();
+//                progressDialog.dismiss();
+
+                Handler h = new Handler(Looper.getMainLooper());
+                h.post(new Runnable() {
+                    public void run() {
+
+                        Toast.makeText(context, "Ip Connection Failed ", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+                return null;
+            } catch (Exception e) {
+                e.printStackTrace();
+//                progressDialog.dismiss();
+                return null;
+            }
         }
 
         @Override
@@ -1335,4 +1492,122 @@ public class ExportJson {
         }
 
     }
+
+
+    private class SendImage extends AsyncTask<String, String, String> {
+
+        String intentReSend,image="";
+        public SendImage(Context context,String image) {
+
+            this.image=image;
+            this.intentReSend=intentReSend;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+//                if (!ipAddress.equals("")) {
+                String ip =valetDatabase.getAllIPSetting();
+
+//                URL_TO_HIT = " http://"+ip.trim()+"/api/ValCaptain/senddata";
+                URL_TO_HIT = "http://" + ip.trim() + "/api/ValCaptain/senddata";
+//                }
+            } catch (Exception e) {
+
+            }
+
+
+            Log.e("URL_TO_HIT",""+URL_TO_HIT);
+            try {
+
+                String JsonResponse = null;
+                HttpClient client = new DefaultHttpClient();
+                HttpPost request = new HttpPost();
+                request.setURI(new URI(URL_TO_HIT));
+
+                List<BasicNameValuePair> nameValuePairs = new ArrayList<>(1);
+                // nameValuePairs.add(new BasicNameValuePair("_ID", "3"));
+
+                nameValuePairs.add(new BasicNameValuePair("",image));
+
+                // nameValuePairs.add(new BasicNameValuePair("SERIAL",convertToEnglish(jsonObject.getSERIAL())));
+
+                request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+
+                HttpResponse response = client.execute(request);
+
+
+                BufferedReader in = new BufferedReader(new
+                        InputStreamReader(response.getEntity().getContent()));
+
+                StringBuffer sb = new StringBuffer("");
+                String line = "";
+
+                while ((line = in.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                in.close();
+
+
+                JsonResponse = sb.toString();
+                Log.e("exportCarPark", "JsonResponse\t" + JsonResponse);
+
+                return JsonResponse;
+
+
+            }//org.apache.http.conn.HttpHostConnectException: Connection to http://10.0.0.115 refused
+            catch (HttpHostConnectException ex) {
+                ex.printStackTrace();
+//                progressDialog.dismiss();
+
+                Handler h = new Handler(Looper.getMainLooper());
+                h.post(new Runnable() {
+                    public void run() {
+
+                        Toast.makeText(context, "Ip Connection Failed ", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+                return null;
+            } catch (Exception e) {
+                e.printStackTrace();
+//                progressDialog.dismiss();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (s != null) {
+                if (s.contains("CAR_PARKED_SUCCESS")) {
+                    Log.e("salesManInfo", "ADD_CAPTAIN_STATUS  SUCCESS\t" + s.toString());
+                    Toast.makeText(context, "status"+intentReSend, Toast.LENGTH_SHORT).show();
+                    //context.clearTextFun();
+//                    MapsActivity mapsActivity=(MapsActivity) context;
+//
+//                    if (intentReSend != null && (intentReSend.equals("9"))) {
+//                        mapsActivity.close();
+//                    }else {
+//                        mapsActivity.close();
+//                        finish.setText("1");
+//                    }
+
+                }
+            }
+        }
+
+    }
+
 }

@@ -9,20 +9,21 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/cardview_default_elevation"
-        app:cardBackgroundColor="@color/black"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="20dp"
+        android:elevation="@dimen/cardview_default_elevation"
         android:outlineAmbientShadowColor="@color/yellow"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
         app:cardElevation="30dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,19 +60,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
-                            android:background="@drawable/button_sin"
+                            android:background="@drawable/white"
                             android:ems="10"
                             android:gravity="start|center"
                             android:hint="Note"
                             android:inputType="textPersonName"
+                            android:textColorHint="@color/alpha_yellow"
                             android:padding="10dp"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/alpha_yellow" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0"
                             android:layout_margin="10dp"
+                            android:layout_weight="0"
                             android:orientation="horizontal"
                             android:padding="5dp">
 
@@ -83,7 +85,8 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/button_sin"
                                 android:text="cancel"
-                                android:textColor="@color/yellow" />
+                                android:backgroundTint="@color/orange"
+                                android:textColor="@color/white" />
 
                             <Button
                                 android:id="@+id/accept"
@@ -93,16 +96,14 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/bac_green"
                                 android:text="ok"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/white" />
                         </LinearLayout>
 
                     </LinearLayout>
 
 
-
                 </LinearLayout>
             </LinearLayout>
-
 
 
         </LinearLayout>

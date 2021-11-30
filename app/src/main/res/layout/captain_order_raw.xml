@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/cardview_default_elevation"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp"
@@ -33,7 +33,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="4"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -53,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -69,8 +69,8 @@
                             android:drawableLeft="@drawable/ic_baseline_person_pin_24"
                             android:gravity="start|center"
                             android:text="  Captain Name"
-                            android:drawableTint="@color/white"
-                            android:textColor="@color/white"
+                            android:drawableTint="@color/yellow"
+                            android:textColor="@color/yellow"
                             android:textSize="15dp" />
 
                         <TextView
@@ -101,12 +101,13 @@
                             android:gravity="start|center"
                             android:text="  Rate"
 
-                            android:textColor="@color/white"
+                            android:drawableTint="@color/yellow"
+                            android:textColor="@color/yellow"
                             android:textSize="15dp" />
 
                         <RatingBar
                             android:id="@+id/ratingBar2"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:numStars="5"
                             android:theme="@style/RatingBar"
@@ -139,8 +140,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="5dp"
-                    android:textColor="@color/yellow"
+                    android:textColor="@color/white"
                     android:background="@drawable/button_sin"
+                    android:backgroundTint="@color/orange"
                     android:text="Reject" />
 
                 <Button
@@ -148,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/bac_green"
                     android:text="Accept" />

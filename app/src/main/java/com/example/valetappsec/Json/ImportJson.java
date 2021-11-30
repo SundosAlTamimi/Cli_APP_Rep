@@ -1,6 +1,8 @@
 package com.example.valetappsec.Json;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -11,19 +13,24 @@ import android.widget.Toast;
 
 import com.example.valetappsec.DriverMapsActivity;
 import com.example.valetappsec.LogInActivity;
+import com.example.valetappsec.MainValetActivity;
 import com.example.valetappsec.Model.ClientOrder;
 import com.example.valetappsec.Model.SingUpClientModel;
 import com.example.valetappsec.Model.ValetFireBaseItem;
+import com.example.valetappsec.ProfileActivity;
 import com.example.valetappsec.ValetDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +43,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -71,6 +79,9 @@ Context context;
     public  void getRaw(){
         new getRaw().execute();
     }
+    public  void getImage(int flag){
+        new BitmapImage2(flag).execute();
+    }
 
     public void updateStatus(Context context,ClientOrder clientOrder){
         new updateStatus(context,clientOrder).execute();
@@ -79,6 +90,8 @@ Context context;
     public void updateStatusRej(Context context,ClientOrder clientOrder){
         new updateStatusRej(context,clientOrder).execute();
     }
+
+
 
     public void getStatuss(){
         new GetStatus().execute();
@@ -865,6 +878,69 @@ Context context;
                 isOk=true;}
         }
 
+    }
+
+
+    private class BitmapImage2 extends AsyncTask<String, String, String> {
+int flag=0;
+        public BitmapImage2(int flag) {
+            this.flag=flag;
+        }
+
+        @Override
+        protected String doInBackground(String... pictures) {
+
+            try {
+
+//                if (!singUpUserTableGlobal.getCRIMINAL_RECORE_PIC().equals("null")) {
+                String ip=valetDatabase.getAllIPSetting();
+                for (int i = 0; i < 1; i++) {
+                    Bitmap bitmap = null;
+                    URL url;
+                    switch (i) {
+                        case 0:
+                            if (singUpUserTableGlobal.getCarPic() != null) {//http://192.168.2.17:8088/woody/images/2342_img_1.png
+                                url = new URL("http://" + ip + "/imagesFile/" +singUpUserTableGlobal.getId()+"_CLIENT_CAR_PIC.jpg");
+                                try {
+                                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                                    singUpUserTableGlobal.setCarPicBitmap(bitmap);
+                                } catch (Exception e) {
+//                                        pictures[0].setPic11(bitmap);
+                                }
+                            }
+                            break;
+
+                    }
+                }
+
+//                    Bitmap finalBitmap = bitmap;
+
+
+//                }
+            } catch (Exception e) {
+                Log.e("fromclass2", "exception:doInBackground " + e.getMessage());
+                return "exception";
+            }
+            return "null";// BitmapFactory.decodeStream(in);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.e("fromclass2", "exception:onPostExecute: " + s);
+            try {
+                if(flag==1) {
+                    ProfileActivity profileActivate = (ProfileActivity) context;
+                    profileActivate.fillImage();
+                }else if(flag==2){
+                    MainValetActivity profileActivate = (MainValetActivity) context;
+                    profileActivate.fillImage();
+                }
+            }catch (Exception e){}
+
+            if (s.contains("exception"))
+                Toast.makeText(context, "No image found!", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
 }

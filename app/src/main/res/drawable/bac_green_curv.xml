@@ -4,10 +4,10 @@
     <item>
         <shape android:shape="rectangle">
             <!--3CF4F9FD-->
-            <solid android:color="@color/alpha_yellow"/>
+            <solid android:color="@color/white"/>
             <corners
-                android:topLeftRadius="500dp"
-                android:topRightRadius="500dp"/>
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp"/>
             <stroke android:width="0.5dp"
                 android:color="@color/yellow"
                 />

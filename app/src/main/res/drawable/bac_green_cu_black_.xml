@@ -4,9 +4,14 @@
     <item>
         <shape android:shape="rectangle">
             <!--3CF4F9FD-->
-            <solid android:color="@color/white"/>
+            <gradient
+                android:endColor="@color/yellow"
+                android:startColor="@color/yellow"
+                android:angle="90" />
+<!--            <solid android:color="@color/yellow"/>-->
             <corners
-             android:radius="30dp"/>
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp"/>
             <stroke android:width="0dp"
                 android:color="@color/yellow"
                 />

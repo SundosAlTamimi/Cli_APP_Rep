@@ -4,40 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/car4"
-    tools:context=".MainActivity" >
-
+    android:orientation="vertical"
+    tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4"
         android:gravity="center"
-        android:background="@drawable/alpha_background"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/bac_green_cu_black_2"
         android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/carPicC"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_weight="0"
+            android:padding="5dp"
+            android:src="@drawable/car4"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="0.2dp" />
 
         <TextView
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:fontFamily="casual"
             android:gravity="center"
             android:text="Welcome Ali"
             android:textColor="@color/white"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:text="Hi ,Client Thanks for Use App"
+            android:textColor="@color/color_5"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/alpha_background"
+        android:background="@drawable/bac_green_curv"
+        android:elevation="10dp"
         android:gravity="center"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,8 +78,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/bac_green"
-                android:gravity="center"
                 android:elevation="20dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
@@ -64,8 +89,8 @@
                     android:layout_weight="1"
                     android:padding="5dp"
                     app:srcCompat="@drawable/req_car"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/black" />
+                    app:tint="@color/white"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:id="@+id/startReqText"
@@ -74,9 +99,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Start Request"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,25 +110,25 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/white"
-                android:elevation="20dp"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_baseline_person_pin_24"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/white" />
+                    app:tint="@color/yellow"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="Profile"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textColor="@color/yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,7 +141,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"/>
+                    android:padding="20dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -135,7 +160,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"/>
+                    android:padding="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -145,67 +170,74 @@
                 android:layout_weight="2"
                 android:background="@drawable/white"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/black"
                     app:srcCompat="@drawable/ic_baseline_share_24"
+                    app:tint="@color/yellow"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="Share ApP"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textColor="@color/yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/yourLocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/white"
                 android:layout_weight="1"
+                android:background="@drawable/white"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_baseline_place_24"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/white" />
+                    app:tint="@color/yellow"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="My Car Parking Location"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textColor="@color/yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="@drawable/alpha_background"
         android:gravity="center"
-        android:visibility="gone"
-        android:orientation="horizontal">
-    <Button
-        android:id="@+id/startReq2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:layout_margin="10dp"
-        android:background="@drawable/bac_green"
-        android:textColor="@color/black"
-        android:text="Start Request" />
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/startReq2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="0"
+            android:background="@drawable/bac_green"
+            android:text="Start Request"
+            android:textColor="@color/black" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

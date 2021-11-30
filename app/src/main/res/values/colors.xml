@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#f7e53b</color>
-    <color name="purple_500">#f7e53b</color>
-    <color name="purple_700">#f7e53b</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="purple_200">#284686</color>
+    <color name="purple_500">#284686</color>
+    <color name="purple_700">#284686</color>
+    <color name="teal_200">#284686</color>
+    <color name="teal_700">#284686</color>
     <color name="black">#FF000000</color>
-    <color name="alphaBlack">#BF000000</color>
+    <color name="alphaBlack">#80000000</color>
     <color name="alphaBlack2">#99000000</color>
     <color name="alphaBlack3">#B7000000</color>
     <color name="noColor">#0C000000</color>
     <color name="white">#ffffff</color>
     <color name="whiteLight">#9AFFFFFF</color>
-    <color name="yellow">#f7e53b</color>
-    <color name="alpha_yellow">#A3F7E53B</color>
+    <color name="whiteLight_2">#edf0f4</color>
+    <color name="whiteLight_3">#2AEDF0F4</color>
+
+    <color name="color_3">#e4f8fe</color>
+    <color name="color_4">#fef6e3</color>
+    <color name="color_5">#f7effa</color>
+    <color name="orange">#ecb41b</color>
+
+
+    <color name="yellow">#284686</color>
+    <color name="alpha_yellow">#284686</color>
     <array name="array_dot_active">
         <item>@color/yellow</item>
         <item>@color/yellow</item>

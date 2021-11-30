@@ -13,7 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorControlNormal">@color/orange</item>
+    </style>
+    <style name="RatingBar2" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/orange</item>
+        <item name="colorControlNormal">@color/whiteLight</item>
+    </style>
     <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
 
         <item name="android:windowMinWidthMajor">70%</item>

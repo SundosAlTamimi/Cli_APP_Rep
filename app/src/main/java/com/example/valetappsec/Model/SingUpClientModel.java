@@ -1,5 +1,10 @@
 package com.example.valetappsec.Model;
 
+import android.graphics.Bitmap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class SingUpClientModel {
 
     private String id;
@@ -13,7 +18,7 @@ public class SingUpClientModel {
     private  String CarColor;
     private String CarLot;
     private  String carPic;
-
+    private  Bitmap carPicBitmap;
     public SingUpClientModel() {
 
     }
@@ -123,4 +128,39 @@ public class SingUpClientModel {
     public void setCarPic(String carPic) {
         this.carPic = carPic;
     }
+
+    public Bitmap getCarPicBitmap() {
+        return carPicBitmap;
+    }
+
+    public void setCarPicBitmap(Bitmap carPicBitmap) {
+        this.carPicBitmap = carPicBitmap;
+    }
+
+    public JSONObject getSingUpJson (){
+        JSONObject jsonObject=new JSONObject();
+
+        try {
+            jsonObject.put("userName",convertToEnglish(userName));
+            jsonObject.put("phoneNo",convertToEnglish(phoneNo));
+            jsonObject.put("email",convertToEnglish(email));
+            jsonObject.put("password",password);
+            jsonObject.put("carType",carType);
+            jsonObject.put("carModel",carModel);
+            jsonObject.put("CarColor",CarColor);
+            jsonObject.put("CarLot",CarLot);
+            jsonObject.put("carPic",carPic);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return  jsonObject;
+    }
+    public String convertToEnglish(String value) {
+        String newValue = (((((((((((value + "").replaceAll("١", "1")).replaceAll("٢", "2")).replaceAll("٣", "3")).replaceAll("٤", "4")).replaceAll("٥", "5")).replaceAll("٦", "6")).replaceAll("٧", "7")).replaceAll("٨", "8")).replaceAll("٩", "9")).replaceAll("٠", "0").replaceAll("٫","."));
+        return newValue;
+    }
+
 }

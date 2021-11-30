@@ -91,7 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1.3"
-                            android:background="@drawable/bac_green_cu_black"
+                            android:background="@drawable/bac_green_cu_black_"
                             android:elevation="10dp"
                             android:gravity="center"
                             android:orientation="vertical"
@@ -101,7 +101,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="3dp"
                                 android:layout_margin="10dp"
-                                android:background="@drawable/bac_green" />
+                                android:background="@drawable/bac_search_black" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -175,7 +175,7 @@
                                                         android:layout_height="wrap_content"
                                                         android:gravity="center"
                                                         android:text="Your Location"
-                                                        android:textColor="@color/alpha_yellow"
+                                                        android:textColor="@color/white"
                                                         android:textSize="30dp" />
 
                                                     <TextView
@@ -193,7 +193,7 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="1.2dp"
                                                     android:layout_margin="10dp"
-                                                    android:background="@drawable/bac_green" />
+                                                    android:background="@drawable/bac_search_black" />
 
 
                                                 <LinearLayout
@@ -223,7 +223,7 @@
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="5dp"
                                                         android:layout_weight="1"
-                                                        android:background="@drawable/bac_green"
+                                                        android:background="@drawable/bac_search_black"
                                                         android:shadowColor="@color/yellow"
                                                         android:shadowDx="0"
                                                         android:shadowDy="8"

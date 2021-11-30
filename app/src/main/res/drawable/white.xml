@@ -2,13 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <!--<gradient-->
-            <!--android:endColor="#A3B4DCF0"-->
-            <!--android:endColor="#A3B4DCF0"-->
-            <!--android:angle="90" />-->
+<!--            <gradient-->
+<!--            android:endColor="@color/color_3"-->
+<!--            android:startColor="@color/alpha_yellow"-->
+<!--            android:angle="90" />-->
             <stroke
                 android:width="0.2dp"
-                android:color="#ffff" />
+                android:color="@color/yellow" />
             <corners
                 android:radius="50dp" />
             <padding

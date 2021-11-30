@@ -2,6 +2,7 @@ package com.example.valetappsec;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -23,6 +24,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -122,7 +124,10 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     RadioButton cashPayment, walletPayment;
     Button iNeedCaptain,scanQRCode,returnButton,Pay,rating,callInfo,callParking,navigation,Arrive,calls,End,endRequest,endRequestList,late;
     int flafOpen = 0;
-//    Button go;
+    private static final int SELECT_IMAGE = 3;
+    private Uri fileUri;
+    Bitmap YourPicBitmap1=null;
+    //    Button go;
     ListView list;
     ValetDatabase valetDatabase;
     Timer T;
@@ -170,7 +175,9 @@ ImageView cancelSearch;
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     Log.e("textViewListner 3","q = ");
-                    searchFunction(0);
+                    if (flafOpen == 0) {
+                        searchFunction(0);
+                    }
                     return true;
                 }
                 return false;
@@ -875,7 +882,9 @@ ImageView cancelSearch;
 
         searchView.setText(searchArray.get(index));
         searchList.setVisibility(View.GONE);
-        searchFunction(1);
+        if (flafOpen == 0) {
+            searchFunction(1);
+        }
     }
 
     public  void searchView (){
@@ -894,7 +903,7 @@ ImageView cancelSearch;
     }
     void CountTime() {
 
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timeCountDown.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -905,7 +914,7 @@ ImageView cancelSearch;
             public void onFinish() {
                 timeCountDown.setText("00:00:00");
                // regenaratQr.setVisibility(View.VISIBLE);
-                late.setBackground(getResources().getDrawable(R.drawable.bac_green));
+                late.setBackground(getResources().getDrawable(R.drawable.bac_search_black));
                 late.setEnabled(true);
             }
 
@@ -990,7 +999,7 @@ ImageView cancelSearch;
             } else {
 
                 Log.e("MainActivity", "" + Result.getContents());
-                Toast.makeText(this, "Scan ___" + Result.getContents()+"   "+QrGenarater, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "Scan ___" + Result.getContents()+"   "+QrGenarater, Toast.LENGTH_SHORT).show();
 
                 String result=Result.getContents().toString();
                 if(result.equals(QrGenarater)){
@@ -1764,7 +1773,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(singUpUserTableGlobal.getId()+"_Client").setValue(valetFireBaseItem).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+          //      Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -1777,7 +1786,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child("INeedCaptain").setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -1789,7 +1798,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child("DeleteRequest").setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+       //        Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -1800,7 +1809,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(singUpUserTableGlobal.getId()+"_Client").child("status").setValue(valetFireBase).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+       //         Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -1825,7 +1834,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(singUpUserTableGlobal.getId()+"_Client").child("status").setValue(valetFireBase).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+     //           Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -1840,7 +1849,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(captainId+"_VALET").child("status").setValue(valetFireBase).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -1853,7 +1862,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(captainId+"_VALET").child("ifReturn").setValue(valetFireBase).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+          //      Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -1896,7 +1905,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(singUpUserTableGlobal.getId()+"_CarInWay").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+         //       Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -1918,7 +1927,7 @@ String name="";
         databaseReference.child("StatusValetGroup").child(captainId+"_LATE").setValue(note).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+         //       Toast.makeText(DriverMapsActivity.this, "Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -2021,5 +2030,7 @@ String name="";
 
         packingListDialog.show();
     }
+
+
 
 }

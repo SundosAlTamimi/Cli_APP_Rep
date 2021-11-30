@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/cardview_default_elevation"
-        app:cardBackgroundColor="@color/black"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp"
@@ -59,13 +59,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
-                            android:background="@drawable/button_sin"
+                            android:background="@drawable/white"
                             android:ems="10"
                             android:gravity="start|center"
                             android:hint="Cancel Reason"
                             android:inputType="textPersonName"
                             android:padding="10dp"
-                            android:textColor="@color/white"
+                            android:textColorHint="@color/alpha_yellow"
+                            android:textColor="@color/alpha_yellow"
                             />
 
                         <LinearLayout
@@ -84,7 +85,8 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/button_sin"
                                 android:text="cancel"
-                                android:textColor="@color/yellow" />
+                                android:backgroundTint="@color/orange"
+                                android:textColor="@color/white" />
 
                             <Button
                                 android:id="@+id/accept"
@@ -94,7 +96,7 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/bac_green"
                                 android:text="ok"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/white" />
                         </LinearLayout>
 
                     </LinearLayout>

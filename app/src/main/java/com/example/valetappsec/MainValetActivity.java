@@ -17,9 +17,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.valetappsec.Json.ImportJson;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.valetappsec.GlobalVairable.captainClientTransfer;
 import static com.example.valetappsec.GlobalVairable.globalText;
@@ -30,6 +34,7 @@ LinearLayout startReq,shareApp,profile,yourLocation;
 TextView user,startReqText;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     ValetDatabase valetDatabase;
+    CircleImageView carPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,10 @@ TextView user,startReqText;
         profile=findViewById(R.id.profile);
         user=findViewById(R.id.user);
         startReqText=findViewById(R.id.startReqText);
+        carPic=findViewById(R.id.carPicC);
         globalText=startReqText;
+        ImportJson importJson=new ImportJson(MainValetActivity.this);
+     //   importJson.getImage(2);
         valetDatabase=new ValetDatabase(MainValetActivity.this);
         yourLocation=findViewById(R.id.yourLocation);
         user.setText("Welcome "+singUpUserTableGlobal.getUserName());
@@ -185,5 +193,9 @@ TextView user,startReqText;
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    public void fillImage(){
+       carPic.setImageBitmap(singUpUserTableGlobal.getCarPicBitmap());
     }
 }
