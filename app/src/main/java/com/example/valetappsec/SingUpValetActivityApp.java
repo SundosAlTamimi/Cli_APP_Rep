@@ -58,13 +58,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import eltos.simpledialogfragment.SimpleDialog;
-import eltos.simpledialogfragment.color.SimpleColorWheelDialog;
 
-import static com.example.valetappsec.GlobalVairable.clientOrders;
-import static eltos.simpledialogfragment.SimpleDialog.OnDialogResultListener.BUTTON_POSITIVE;
 
-public class SingUpValetActivityApp extends AppCompatActivity implements View.OnClickListener , SimpleDialog.OnDialogResultListener  {
+public class SingUpValetActivityApp extends AppCompatActivity implements View.OnClickListener  {
 
     Button next, singUp;
     EditText userName, phoneNo, password, email,
@@ -327,17 +323,6 @@ ArrayAdapter<String> carTAdapter,carMAdapter;
         });
     }
 
-    @Override
-    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if (COLOR_PICKER.equals(dialogTag) && which == BUTTON_POSITIVE){
-            int color = extras.getInt(SimpleColorWheelDialog.COLOR);
-           // Toast.makeText(this, "Color = "+color, Toast.LENGTH_SHORT).show();
-            carColor.setText(""+color);
-            carColor.setBackgroundColor(color);
-            return true;
-        }
-        return false;
-    }
 
     public DatePickerDialog.OnDateSetListener openDatePickerDialog(final int flag) {
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {

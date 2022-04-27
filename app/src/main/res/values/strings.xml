@@ -6,4 +6,6 @@
     <string name="skip">SKIP</string>
     <string name="start">Save</string>
     <string name="signup">Sign Up</string>
+    <string name="search_hint">Search Places</string>
+    <string name="search_settings">Search Places</string>
 </resources>

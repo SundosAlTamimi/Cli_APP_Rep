@@ -9,12 +9,14 @@ import android.util.Log;
 import android.widget.ListView;
 
 
+import com.example.valetappsec.Model.UserService;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ValetDatabase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION =4;//version Db
+    private static final int DATABASE_VERSION =5;//version Db
     private static final String DATABASE_Name = "ValetDBase";//name Db
 
     static SQLiteDatabase Idb;
@@ -30,6 +32,13 @@ public class ValetDatabase extends SQLiteOpenHelper {
 
     private static final String IP_RAW = "IP_RAW";
     private static final String ACTIVITY = "ACTIVITY";
+    //___________________________________________________________________________________
+    private static final String USER_TABLE_SERVICE = "USER_TABLE_SERVICE";
+
+    private static final String USER_ID = "USER_ID";
+    private static final String USER_NAME = "USER_NAME";
+    private static final String PHONE_NO = "PHONE_NO";
+    private static final String ON_OFF_SERVICE = "ON_OFF_SERVICE";
 
     //_________________________________________________________________________________
 //___________________________________________________________________________________
@@ -61,6 +70,13 @@ public class ValetDatabase extends SQLiteOpenHelper {
                 + LOCATION_NAME + " NVARCHAR" + ")";
         Idb.execSQL(CREATE_TABLE_LOCATION);
 
+
+        String CREATE_TABLE_USER_TABLE = "CREATE TABLE " + USER_TABLE_SERVICE + "("
+                + USER_ID + " NVARCHAR" + ","
+                + USER_NAME + " NVARCHAR" + ","
+                + PHONE_NO + " NVARCHAR" + ","
+                + ON_OFF_SERVICE + " NVARCHAR" + ")";
+        Idb.execSQL(CREATE_TABLE_USER_TABLE);
 //=========================================================================================
 
 //=========================================================================================
@@ -88,6 +104,17 @@ public class ValetDatabase extends SQLiteOpenHelper {
 
         }
 
+        try{
+            String CREATE_TABLE_USER_TABLE = "CREATE TABLE " + USER_TABLE_SERVICE + "("
+                    + USER_ID + " NVARCHAR" + ","
+                    + USER_NAME + " NVARCHAR" + ","
+                    + PHONE_NO + " NVARCHAR" + ","
+                    + ON_OFF_SERVICE + " NVARCHAR" + ")";
+            Idb.execSQL(CREATE_TABLE_USER_TABLE);
+        }catch (Exception e){
+
+        }
+
     }
 
 
@@ -100,6 +127,20 @@ public class ValetDatabase extends SQLiteOpenHelper {
         Idb.insert(SETTING_TABLE, null, values);
         Idb.close();
     }
+
+    public void addUserService(UserService userService) {
+        Idb = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(USER_ID,userService.getUserid() );
+        values.put(USER_NAME,userService.getUserName() );
+        values.put(PHONE_NO,userService.getUserPhoneNo() );
+        values.put(ON_OFF_SERVICE,userService.getOnOff() );
+
+        Idb.insert(USER_TABLE_SERVICE, null, values);
+        Idb.close();
+    }
+
     public void addLocation(String location) {
         Idb = this.getReadableDatabase();
         ContentValues values = new ContentValues();
@@ -186,12 +227,49 @@ public class ValetDatabase extends SQLiteOpenHelper {
         return idRaw;
     }
 
+    public String getAllUser() {
+
+        String selectQuery = "SELECT  * FROM " + USER_TABLE_SERVICE;
+        Idb = this.getWritableDatabase();
+        Cursor cursor = Idb.rawQuery(selectQuery, null);
+        String idRaw="";
+        if (cursor.moveToFirst()) {
+            do {
+
+                idRaw=cursor.getString(0);
+
+            } while (cursor.moveToNext());
+        }
+        return idRaw;
+    }
+
+    public String getAllUserOnOff() {
+
+        String selectQuery = "SELECT  * FROM " + USER_TABLE_SERVICE;
+        Idb = this.getWritableDatabase();
+        Cursor cursor = Idb.rawQuery(selectQuery, null);
+        String idRaw="";
+        if (cursor.moveToFirst()) {
+            do {
+
+                idRaw=cursor.getString(3);
+
+            } while (cursor.moveToNext());
+        }
+        return idRaw;
+    }
+
+
     public void delete() {
         Idb= this.getWritableDatabase();
         Idb.execSQL("DELETE FROM "+SETTING_TABLE); //delete all rows in a table
         Idb.close();
     }
-
+    public void deleteUser() {
+        Idb= this.getWritableDatabase();
+        Idb.execSQL("DELETE FROM "+USER_TABLE_SERVICE); //delete all rows in a table
+        Idb.close();
+    }
     public String convertToEnglish(String value) {
         String newValue = (((((((((((value + "").replaceAll("١", "1")).replaceAll("٢", "2")).replaceAll("٣", "3")).replaceAll("٤", "4")).replaceAll("٥", "5")).replaceAll("٦", "6")).replaceAll("٧", "7")).replaceAll("٨", "8")).replaceAll("٩", "9")).replaceAll("٠", "0").replaceAll("٫","."));
         return newValue;
@@ -212,4 +290,12 @@ public class ValetDatabase extends SQLiteOpenHelper {
         values.put(ACTIVITY, ACTIVITY);
         Idb.update(SETTING_IP_TABLE, values, ACTIVITY + " = '" + ipOld + "'", null);
     }
+    public void updateUser(String idOld, String ac) {
+        Idb = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(ON_OFF_SERVICE, ac);
+        Idb.update(USER_TABLE_SERVICE, values, USER_ID + " = '" + idOld + "'", null);
+    }
+
 }

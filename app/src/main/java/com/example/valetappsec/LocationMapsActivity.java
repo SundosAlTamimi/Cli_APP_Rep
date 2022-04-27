@@ -136,7 +136,7 @@ public class LocationMapsActivity extends FragmentActivity  implements OnMapRead
         // requestButton.setVisibility(View.VISIBLE);
 
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        String locationProvider = LocationManager.NETWORK_PROVIDER;
+        String locationProvider = LocationManager.GPS_PROVIDER;
         // I suppressed the missing-permission warning because this wouldn't be executed in my
         // case without location services being enabled
         //  @SuppressLint("MissingPermission")

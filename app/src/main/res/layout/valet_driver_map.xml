@@ -115,10 +115,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0"
-                                android:background="@drawable/bac_green_cu_black_2"
+                                android:background="@drawable/bac_green_cu_black_3"
                                 android:gravity="center"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="visible">
 
                                 <TextView
                                     android:id="@+id/textView7"
@@ -148,6 +148,25 @@
                                     android:layout_weight="0"
                                     android:src="@drawable/sa"
                                     app:civ_border_width="1dp" />
+
+                                <Button
+                                    android:id="@+id/close"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:layout_weight="0"
+                                    android:background="@drawable/bac_search_black"
+                                    android:shadowColor="@color/yellow"
+                                    android:shadowDx="0"
+                                    android:drawableStart="@drawable/ic_baseline_cancel_24"
+                                    android:padding="5dp"
+                                    android:drawablePadding="5dp"
+                                    android:drawableTint="@color/yellow"
+                                    android:backgroundTint="@color/orange"
+                                    android:shadowDy="8"
+                                    android:text="Close"
+                                    android:textColor="@color/yellow"
+                                    android:drawableLeft="@drawable/ic_baseline_cancel_24" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -299,6 +318,7 @@
                                                     android:background="@drawable/main_lay_w"
                                                     android:ems="10"
                                                     android:gravity="center"
+                                                    android:visibility="gone"
                                                     android:hint="where Are You Going ? (Option)"
                                                     android:inputType="textPersonName"
                                                     android:padding="5dp" />
@@ -1774,7 +1794,7 @@
                             android:elevation="10dp"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="50dp"
@@ -2902,6 +2922,7 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
+
                             <EditText
                                 android:id="@+id/idSearchView"
                                 android:layout_width="match_parent"
@@ -2919,6 +2940,26 @@
                                 android:imeOptions="actionSearch"
                                 android:inputType="text"
                                 android:padding="5dp" />
+
+                            <EditText
+                                android:id="@+id/ser"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/white"
+                                android:drawableStart="@drawable/ic_baseline_search_24"
+                                android:drawableLeft="@drawable/ic_baseline_search_24"
+                                android:ems="10"
+                                android:drawableTint="@color/orange"
+                                android:gravity="center|start"
+                                android:textColor="@color/black"
+                                android:visibility="gone"
+                                android:textColorHint="@color/alphaBlack"
+                                android:hint="Search (Where Are You Going?) "
+                                android:imeOptions="actionSearch"
+                                android:inputType="text"
+                                android:padding="5dp" />
+
 
                             <ImageView
                                 android:id="@+id/cancelSearch"

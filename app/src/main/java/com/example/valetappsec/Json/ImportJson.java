@@ -1,6 +1,10 @@
 package com.example.valetappsec.Json;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -17,7 +21,9 @@ import com.example.valetappsec.MainValetActivity;
 import com.example.valetappsec.Model.ClientOrder;
 import com.example.valetappsec.Model.SingUpClientModel;
 import com.example.valetappsec.Model.ValetFireBaseItem;
+import com.example.valetappsec.MyServices;
 import com.example.valetappsec.ProfileActivity;
+import com.example.valetappsec.TrackingService;
 import com.example.valetappsec.ValetDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,6 +55,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.example.valetappsec.DriverMapsActivity.appTracking;
 import static com.example.valetappsec.GlobalVairable.arriveTime;
 import static com.example.valetappsec.GlobalVairable.captainClientTransfer;
 import static com.example.valetappsec.GlobalVairable.captainId;
@@ -747,7 +754,19 @@ Context context;
                     mainValetActivity.updateInFireBaseClient("4",clientOrder.getCaptainName(),clientOrder.getCaptainId()+"",clientOrder.getCaptainPhoneNo());
 
                     mainValetActivity.UpdateInFireBaseCaptain("3",clientOrder.getCaptainId()+"");
+                    try {
+                        MyServices.ServiceWork=true;
+//                        if(!isMyServiceRunning(MyServices.class)) {
+                            Log.e("serviseTag1","  eroor");
+                            context.startService(new Intent(context, MyServices.class));
+//                        }else{
+//                            Log.e("serviseTag2","   no  eroor");
+//                        }
+                        valetDatabase.updateUser(singUpUserTableGlobal.getId(),"1");
 
+                    }catch (Exception e){
+                        Log.e("gtrs","  eroor"+e.toString());
+                    }
                     isOk=true;
                 } else {
                     Log.e("onPostExecute", "" + s.toString());
@@ -941,6 +960,16 @@ int flag=0;
                 Toast.makeText(context, "No image found!", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(context,serviceClass);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

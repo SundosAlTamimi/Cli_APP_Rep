@@ -1,7 +1,11 @@
 package com.example.valetappsec.Adapter;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 import com.example.valetappsec.Json.ImportJson;
 import com.example.valetappsec.Model.ClientOrder;
 import com.example.valetappsec.R;
+import com.example.valetappsec.TrackingService;
 
 import java.util.List;
 
@@ -79,6 +84,8 @@ public class ListAdapterOrder extends BaseAdapter {
                     clientOrder = itemsList.get(i);
                     ImportJson exportJson = new ImportJson(context);
                     exportJson.updateStatus(context, clientOrder);
+
+//                    context.startService(new Intent(context, TrackingService.class));
                 }catch (Exception e){
 
                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);

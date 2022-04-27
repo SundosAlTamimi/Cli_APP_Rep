@@ -1,6 +1,10 @@
 package com.example.valetappsec.Json;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -13,7 +17,9 @@ import com.example.valetappsec.Model.CaptainClientTransfer;
 import com.example.valetappsec.Model.ClientOrder;
 import com.example.valetappsec.Model.SingUpClientModel;
 import com.example.valetappsec.Model.ValetFireBaseItem;
+import com.example.valetappsec.MyServices;
 import com.example.valetappsec.SingUpValetActivityApp;
+import com.example.valetappsec.TrackingService;
 import com.example.valetappsec.ValetDatabase;
 import com.google.gson.JsonObject;
 
@@ -39,6 +45,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.example.valetappsec.DriverMapsActivity.appTracking;
 import static com.example.valetappsec.GlobalVairable.captainClientTransfer;
 import static com.example.valetappsec.GlobalVairable.captainId;
 import static com.example.valetappsec.GlobalVairable.ids;
@@ -805,6 +812,23 @@ public class ExportJson {
                         captainMapsActivity.UpdateInFireBaseCaptainReturn("1",captainId);
                     }
 
+                    if(Cp.equals("151")){
+                        try {
+                            Log.e("Location","Stop");
+                            MyServices.ServiceWork=false;
+//                            if(!isMyServiceRunning(MyServices.class)) {
+                                Log.e("serviseTag3", "  eroor");
+                                context.stopService(new Intent(context, MyServices.class));
+//                            }else {
+//                                Log.e("serviseTag4", "  stop eroor");
+//                            }
+                            valetDatabase.updateUser(singUpUserTableGlobal.getId(),"0");
+                            //  context.stopService(new Intent(context, TrackingService.class));
+                        }catch (Exception e){
+                            Log.e("Location","StopEx");
+
+                        }
+                    }
                     sweetAlertDialogStatus.dismissWithAnimation();
 
 
@@ -1609,5 +1633,16 @@ public class ExportJson {
         }
 
     }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(context,serviceClass);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
